@@ -31,8 +31,35 @@ def is_game_over(board[List[List[str]]]) -> bool:
     """Check if the game is over(Either one player wins or its a draw)"""
     return is_winner(board, player='X') or is winner(board, player='O') or all(" " not in a row for row in board)
 
-
-                                                        
+def minimax(board: List[List[str]], depth: int, maximizing_player:bool)-> int:
+    if is_winner(board, "X"):
+        return -1
+    if is_winner(board, "0"):
+        return 1
+    if is_game_over(board):
+        return 0
+    
+    if maximizing_player:
+        best_score = float('-inf')
+        for row in range(3):
+            for col in range(3):
+                if is_move_valid(board, row, col):
+                    board[row][col] = "0"
+                    score = minimax(board, depth+1, False)
+                    board[row][col] = " "    
+                    best_score = max(score, best_score)
+        return best_score
+    else:
+         best_score = float('-inf')
+         for row in range(3):
+            for col in range(3):
+                if is_move_valid(board, row, col):
+                    board[row][col] = "X"
+                    score = minimax(board, depth+1, False)
+                    board[row][col] = " "    
+                    best_score = max(score, best_score)
+    return best_score
+                           
 
 
 
