@@ -97,7 +97,7 @@ def play_game() -> None:
             current_player = "0" if current_player == "X" else "X"
         else:
             print("Invalid move. Try again")
-    else:
+    else: 
         print("Its a tie")
 
 
